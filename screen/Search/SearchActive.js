@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, StyleSheet, View, TextInput, TouchableNativeFeedback, TouchableOpacity } from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
-import SearchBlock from '../../components/SeachBlock'
+import SearchBlock from '../../components/Input'
 import SelectLanguage from '../../components/SelectLanguage'
 
 const SearchActive = ({navigation}) => {

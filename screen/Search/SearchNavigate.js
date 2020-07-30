@@ -4,8 +4,7 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 
 import Search from './Search'
 import SearchActive from './SearchActive'
-import SelectLanguage from '../../components/SelectLanguage'
- 
+ import Word from './Word'
 
 
 const Stack = createStackNavigator();
@@ -13,9 +12,8 @@ const Stack = createStackNavigator();
 const SearchNavigate = () => {
 
     return (
-        <Stack.Navigator initialRouteName="Search" 
+        <Stack.Navigator initialRouteName="Word" 
             screenOptions={{
-                headerTitleAlign: 'center',
                 headerShown: false
              }}
              
@@ -32,7 +30,6 @@ const SearchNavigate = () => {
                     shadowOpacity: 0,
 
                 },
-                headerTitle: ''
             }} 
              
           />
@@ -48,8 +45,11 @@ const SearchNavigate = () => {
                     shadowOpacity: 0,
 
                 },
-                headerTitle: ''
             }} 
+          />
+          <Stack.Screen
+            name="Word"
+            component={Word}
           />
             
         </Stack.Navigator>

@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
-import { Text, StyleSheet, View, TextInput, TouchableNativeFeedback, TouchableOpacity } from 'react-native'
+import {StyleSheet, View, TextInput} from 'react-native'
 
 
-const   SearchBlock = ({navigation}) => {
-    
+const SearchBlock = ({noFocus, w100}) => {
+    const width = {
+        width: !w100 === true ? '100%': '90%'
+    }
         return (
-            <View style={styles.inputBlock}>
+            <View style={styles.inputBlock, width}>
                 <TextInput 
                     style={styles.input}
                     placeholder="Введите текст"
                     placeholderTextColor={'#CFCFCF'}
-                    autoFocus={true}
+                    autoFocus={!noFocus}
                 />
             </View>
         )

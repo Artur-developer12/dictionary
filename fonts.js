@@ -11,8 +11,10 @@ const getFonts = () =>{
       'Montserrat-Light': require('./assets/fonts/Montserrat-Light.ttf'),
       'Montserrat-ExtraLight': require('./assets/fonts/Montserrat-ExtraLight.ttf'),
       'Montserrat-Thin': require('./assets/fonts/Montserrat-Thin.ttf'),
+      'Montserrat-LightItalic': require('./assets/fonts/Montserrat-LightItalic.ttf'),
 
       'Roboto-Black': require('./assets/fonts/Roboto-Black.ttf'),
+      'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
   
     })
   
