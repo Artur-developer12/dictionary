@@ -4,7 +4,7 @@ import {StyleSheet, View, TextInput} from 'react-native'
 
 const SearchBlock = ({noFocus, w100}) => {
     const width = {
-        width: !w100 === true ? '100%': '90%'
+        width: w100 === true ? '100%': '90%'
     }
         return (
             <View style={styles.inputBlock, width}>

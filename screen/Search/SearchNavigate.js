@@ -12,12 +12,10 @@ const Stack = createStackNavigator();
 const SearchNavigate = () => {
 
     return (
-        <Stack.Navigator initialRouteName="Word" 
+        <Stack.Navigator initialRouteName="Search" 
             screenOptions={{
                 headerShown: false
              }}
-             
-             
           >
           <Stack.Screen 
             name="Search" 
