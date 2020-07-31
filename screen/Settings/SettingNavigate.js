@@ -2,33 +2,38 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
-import SettingMain from './Settings'
+import Settings from './Settings'
+
 import Language from './options/Language'
+import MyWord from './options/MyWord'
+import FeedBack from './options/FeedBack'
+import About from './options/About'
 
 const Stack = createStackNavigator();
 const setting = () => {
     return (
         <Stack.Navigator 
-            initialRouteName="SettingMain"
+            initialRouteName="Settings"
             screenOptions={{
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
             }}
         
         >
           <Stack.Screen 
-            name="SettingMain" 
-            component={SettingMain} 
+            name="Settings" 
+            component={Settings} 
             options={{
                 title: 'Настройки',
                 headerTitleStyle: {
-                    fontSize: 30,
-                    fontFamily: 'Montserrat-SemiBold'
-                    
-
+                    fontSize: 26,
+                    fontFamily: 'Montserrat-Bold'
                 }
             }}
             />
           <Stack.Screen name="Language" options={{title: 'Язык'}} component={Language} />
+          <Stack.Screen name="FeedBack" options={{title: 'Обратная связь'}} component={FeedBack} />
+          <Stack.Screen name="MyWord" options={{title: 'Мой слова'}} component={MyWord} />
+          <Stack.Screen name="About" options={{title: 'О приложений'}} component={About} />
         </Stack.Navigator>
     )
 }

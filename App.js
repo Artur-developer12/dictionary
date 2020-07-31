@@ -19,7 +19,6 @@ export default function App() {
   if(fontLoaded){
   return (
       <NavigationContainer>
-        
           <Tab.Navigator
               tabBarOptions={{
                 keyboardHidesTabBar: false
