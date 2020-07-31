@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { Text, StyleSheet, View, TextInput, TouchableNativeFeedback, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { Text, StyleSheet, View, TouchableNativeFeedback, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons'; 
-
 import SelectLanguage from '../../components/SelectLanguage'
+
+ 
+
+
 
 const Search = ({navigation}) =>  {
     
-    const [focus, setFocus] = useState(false)
+ 
+
         return (
             <View style={styles.conteiner}>
                 <StatusBar style="auto" />
@@ -104,5 +108,5 @@ const styles = StyleSheet.create({
 
     }
 })
-
+ 
 export default Search
