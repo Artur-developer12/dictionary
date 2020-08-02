@@ -4,18 +4,24 @@ import { StyleSheet, Text, View } from 'react-native'
 import More from '../components/More'
 
 
-const Sentence = () => {
+const Sentence = ({sentence}) => {
+    let count = 1
     return (
         <View style={styles.sentence}>
             <Text style={styles.sentenceTitle}>Предложенэ</Text>
             <View style={styles.sentenceBlock}>
-                <View style={styles.sentenceItem}>
-                    <Text style={styles.sentenceNum}>1</Text>
-                    <View style={styles.sentenceElem}>
-                        <Text style={styles.sentenceWord}>Акъыл иIэн</Text>
-                        <Text style={styles.sentenceTranslate}>Обладать умом</Text>
+            {sentence.map((item, index)=>{
+                return (
+                    <View key={index} style={styles.sentenceItem}>
+                        <Text style={styles.sentenceNum}>{count++}</Text>
+                        <View style={styles.sentenceElem}>
+                            <Text style={styles.sentenceWord}>{item.text_circassian}</Text>
+                            <Text style={styles.sentenceTranslate}>{item.text_rusisan}</Text>
+                        </View>
                     </View>
-                </View>
+                )
+            })
+            }
             </View>
             <More/>
         </View>

@@ -7,7 +7,7 @@ import RadioButton from '../components/RadioButton'
 import SelfModal from '../components/SelfModal'
 
 
-const Translate = () => {
+const Translate = ({translate}) => {
 
     const [visible, setVisible] = useState(false)
     const closeModal = () => setVisible(false)
@@ -17,9 +17,9 @@ const Translate = () => {
         <View style={styles.translate}>
           <SelfModal visible={visible} closeModal={closeModal}/>
             <View style = {styles.wordBlock}>
-                <Text style={styles.Word}>Акъыл</Text>
+                <Text style={styles.Word}>{translate.rus_word.word}</Text>
                 <View style = {styles.Value}>
-                    <Text style = {styles.ValueText}>ум, разум, сознание</Text>
+                    <Text style = {styles.ValueText}>{translate.cher_word.word}</Text>
                     <TouchableHighlight
                          activeOpacity={0.6}
                          underlayColor="#DDDDDD"

@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { Text, StyleSheet, View, TextInput, TouchableNativeFeedback, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, TextInput, ActivityIndicator, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons'; 
+import {useSelector} from 'react-redux'
 
 import Input from '../../components/Input'
 import SelectLanguage from '../../components/SelectLanguage'
+import ButtonBack from '../../components/ButtonBack'
 
 const SearchActive = ({navigation}) => {
+    const loading = useSelector(state => state.loading);
+    const searchData = useSelector(state => state.searchData);
+    
     return (
         <View style={styles.conteiner}>
             
@@ -15,13 +20,21 @@ const SearchActive = ({navigation}) => {
                 <SelectLanguage black/>
                 <Input />
             </View >
-            <View style={styles.back} >
-                <TouchableOpacity onPress={()=>navigation.navigate('Search')}>
-                    <View style={styles.backIcon}>
-                        <FontAwesome5 name="arrow-left" size={24} color="black" />
+            
+            <ButtonBack navigation={navigation}/>
+            {searchData.map((item,index)=>{
+                return(
+                    <View key={index} style={styles.fetch} >
+                        <TouchableNativeFeedback onPress={()=>navigation.navigate('Word', {wordId: item.translate.id})}>
+                            <View>
+                                <Text style={styles.fetchText}>{item.word}</Text>
+                            </View>
+                        </TouchableNativeFeedback>
                     </View>
-                </TouchableOpacity>
-            </View>
+                )
+            })}
+              <ActivityIndicator animating={loading} hidesWhenStopped={true} size="large" color="#6222c9" />
+            
         </View>
         
     )
@@ -34,23 +47,20 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor: '#fff'
     },
-    back:{
-        position: 'absolute',
-        top: 40,
-        left: 15,
-        zIndex: 100
-    },
-    backIcon:{
-        width: 30,
-        height: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        
-    },
+   
     search:{
         alignItems: 'center',
         backgroundColor: '#fff',
         paddingVertical: 40
     },
+    fetch:{
+        justifyContent: 'center'
+    },
+    fetchText:{
+        fontSize: 15,
+        paddingVertical: 20,
+        paddingHorizontal: 30,
+        fontFamily: 'Montserrat-Medium',
+    }
     
 })

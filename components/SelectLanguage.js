@@ -1,33 +1,33 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableNativeFeedback } from 'react-native'
+import React, { useState, useEffect, useRef } from 'react'
+import { StyleSheet, Text, View, TouchableNativeFeedback, Animated, Easing } from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons';
 
-import {connect} from 'react-redux'
-import {changeLanguage} from '../redux/action'
+import {connect, useSelector, useDispatch, useStore} from 'react-redux'
+import {changeSearchToeRussian, changeSearchToCircassian} from '../redux/action'
 
 
-const SelectLanguage = ({black, language, changeLanguage, searchData}) => {
+const SelectLanguage = ({black}) => {
  
-    const [animateRun, setAnimateRun] = useState(false)
-
-    console.log('langageData',searchData)
+    const language = useSelector(state => state.language);
+    const dispatch = useDispatch();
+    const [changeLanguage, setChangeLanguage] = useState(false)
      
-    const colorText= {
-        color: black=== true ? '#000': '#fff',
-        fontFamily: 'Montserrat-ExtraBold'
-    }
-    
-    const onChange = () => {
-        changeLanguage('Circassian')
+    const colorText= {color: black=== true ? '#000': '#fff',}
+    const onChange = () => setChangeLanguage(!changeLanguage)
+
+    const fadeAnim = useRef(new Animated.Value(0)).current 
+
+
+    useEffect(()=>{
+        changeLanguage === false ? dispatch(changeSearchToeRussian()): dispatch(changeSearchToCircassian())
         console.log(language)
 
-    }
-
+    },[changeLanguage])
   
 
     return (
         <View style={styles.language}>
-            <Text style={styles.languageElem, colorText}>Адыгэбзэ</Text>
+            <Text style={[styles.languageElem, colorText]}>Адыгэбзэ</Text>
             <View >
             <TouchableNativeFeedback  onPress={onChange} background={TouchableNativeFeedback.Ripple('#DFDFDF', true)}>
                 <View style={styles.languageChange} >
@@ -37,7 +37,7 @@ const SelectLanguage = ({black, language, changeLanguage, searchData}) => {
                 </View>
             </TouchableNativeFeedback>
             </View>
-            <Text style={styles.languageElem, colorText}>Русский</Text>
+            <Text style={[styles.languageElem, colorText]}>Русский</Text>
         </View>
     )
 }
@@ -68,15 +68,8 @@ const styles = StyleSheet.create({
     },
 })
 
-const mapStateToProps = state => (
-    { 
-        language: state.language, 
-        searchData: state.searchData
-    }
-)
-const mapDispachToProps = {
-    changeLanguage
-}
+ 
+ 
 
 
-export default connect(mapStateToProps, mapDispachToProps)(SelectLanguage)
+export default SelectLanguage

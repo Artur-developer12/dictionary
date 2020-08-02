@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {StyleSheet, View, TextInput} from 'react-native'
-import {connect} from 'react-redux'
- 
+import {connect, useDispatch, useSelector} from 'react-redux'
 import {fetchSearch} from '../redux/action'
 
 
@@ -9,20 +8,18 @@ import {fetchSearch} from '../redux/action'
 
 
 
-const SearchBlock = ({noFocus, w100, searchData, fetchSearch}) => {
+const SearchBlock = ({noFocus, w100}) => {
 
-    useEffect(()=>{
-        // fetchSearch()
-        console.log('hahahahahhahahhahah',searchData)
-    },[])
-
-
-
-    const width = {
-        width: w100 === true ? '100%': '90%'
+    const searchData = useSelector(state => state.searchData);
+    const dispatch = useDispatch();
+    const onSearch = async (value) => {
+        console.log(value)
+        
+        dispatch(fetchSearch(value))
+        console.log('input',searchData)
     }
-
-    const onSearch = async (value) => {}
+    
+    const width = {width: w100 === true ? '100%': '90%'}
   
 
         return (
@@ -39,7 +36,6 @@ const SearchBlock = ({noFocus, w100, searchData, fetchSearch}) => {
     
 }
 const styles = StyleSheet.create({
-   
     inputBlock:{
         width: '90%'
     },
@@ -52,14 +48,7 @@ const styles = StyleSheet.create({
         
     },
 })
-const mapStateToProps = state => (
-    { 
-        searchData: state.searchData, 
-    }
-)
-const mapDispachToProps = {
-    fetchSearch
-}
+ 
 
 
-export default connect(mapStateToProps, mapDispachToProps)(SearchBlock)
+export default SearchBlock
