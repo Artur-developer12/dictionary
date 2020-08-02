@@ -80,7 +80,7 @@ const SelectLanguage = ({black}) => {
 
     return (
         <View style={styles.language}>
-            <Animated.View style={{transform:[{translateX: translateLeftAnim}]}}>
+            <Animated.View style={[styles.languageElemBlock,{transform:[{translateX: translateLeftAnim}]}]}>
                 <Text style={[styles.languageElem, colorText]}>Русский</Text>
             </Animated.View>
             <View >
@@ -92,8 +92,8 @@ const SelectLanguage = ({black}) => {
                 </View>
             </TouchableNativeFeedback>
             </View>
-            <Animated.View style={{transform:[{translateX: translateRightAnim}]}}>
-                <Text style={[styles.languageElem, colorText]}>Адыгэбзэ</Text>
+            <Animated.View style={[styles.languageElemBlock, {transform:[{translateX: translateRightAnim}]}]}>
+                <Text style={[styles.languageElem, colorText]}>Черкесский</Text>
             </Animated.View>
         </View>
     )
@@ -105,7 +105,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: 20,
         width: 250,
-        justifyContent: 'space-between' ,
+        justifyContent: 'center' ,
+        alignItems: 'center'
+    },
+    languageElemBlock:{
+        width: 150,
         alignItems: 'center'
     },
     languageElem:{
