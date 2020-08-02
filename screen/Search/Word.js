@@ -40,8 +40,8 @@ const Word = ({navigation, route}) => {
                 <ScrollView>
                     <ButtonBack clear navigation={navigation}/>
                     <View style={styles.search}>
-                        <SelectLanguage black w100/>
-                        <Input noFocus/>
+                        {/* <SelectLanguage black w100/>
+                        <Input noFocus/> */}
                     </View>
                     <Translate translate={wordData}/>
                     {wordData.sentence && <Sentence sentence={wordData.sentence}/>}

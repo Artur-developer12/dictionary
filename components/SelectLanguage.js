@@ -13,9 +13,60 @@ const SelectLanguage = ({black}) => {
     const [changeLanguage, setChangeLanguage] = useState(false)
      
     const colorText= {color: black=== true ? '#000': '#fff',}
-    const onChange = () => setChangeLanguage(!changeLanguage)
 
-    const fadeAnim = useRef(new Animated.Value(0)).current 
+
+
+
+
+    
+    // Animation
+    const rotateAnim = useRef(new Animated.Value(0)).current 
+    const translateLeftAnim = useRef(new Animated.Value(0)).current 
+    const translateRightAnim = useRef(new Animated.Value(0)).current 
+    const [toggle, setToggle] = useState(false);
+
+
+    const onAnimate = () => {
+        Animated.parallel([
+            Animated.timing(rotateAnim, {
+              toValue: toggle ? 0: 180,
+              duration: 300,
+              useNativeDriver: true, 
+              easing: Easing.linear,
+            }),
+            Animated.timing(translateLeftAnim, {
+                toValue: toggle ? 0: 180,
+                duration: 300,
+                useNativeDriver: true, 
+                easing: Easing.linear,
+            }),
+            Animated.timing(translateRightAnim, {
+                toValue: toggle ? 0: -180,
+                duration: 300,
+                useNativeDriver: true, 
+                easing: Easing.linear,
+            }),
+
+        ]).start(({finished})=> finished && setChangeLanguage(!changeLanguage))
+             
+
+        
+      };
+
+      const spin = rotateAnim.interpolate({
+          inputRange: [0, 180],
+          outputRange: ['0deg', '180deg']
+        });
+
+
+      
+    const onChange = () => {
+        onAnimate()
+        setToggle(!toggle)
+    }
+
+
+
 
 
     useEffect(()=>{
@@ -23,21 +74,27 @@ const SelectLanguage = ({black}) => {
         console.log(language)
 
     },[changeLanguage])
+
+ 
   
 
     return (
         <View style={styles.language}>
-            <Text style={[styles.languageElem, colorText]}>Адыгэбзэ</Text>
+            <Animated.View style={{transform:[{translateX: translateLeftAnim}]}}>
+                <Text style={[styles.languageElem, colorText]}>Русский</Text>
+            </Animated.View>
             <View >
             <TouchableNativeFeedback  onPress={onChange} background={TouchableNativeFeedback.Ripple('#DFDFDF', true)}>
                 <View style={styles.languageChange} >
-                    <View>
-                        <FontAwesome5   style={styles.languageChangeIcon, colorText} size={18} name="exchange-alt"/>
-                    </View>
+                    <Animated.View style={{ transform: [{ rotate: spin }]}}>
+                            <FontAwesome5   style={styles.languageChangeIcon, colorText} size={18} name="exchange-alt"/>
+                    </Animated.View>
                 </View>
             </TouchableNativeFeedback>
             </View>
-            <Text style={[styles.languageElem, colorText]}>Русский</Text>
+            <Animated.View style={{transform:[{translateX: translateRightAnim}]}}>
+                <Text style={[styles.languageElem, colorText]}>Адыгэбзэ</Text>
+            </Animated.View>
         </View>
     )
 }
@@ -56,9 +113,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-ExtraBold'
     },
     languageChange:{
-        width: 30,
-        height: 30,
-        borderRadius: 50,
+        width: 35,
+        height: 35,
+        borderRadius: 35/2,
         overflow: 'hidden',
         justifyContent: 'center',
         alignItems: 'center'

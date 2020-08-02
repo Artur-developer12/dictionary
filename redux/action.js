@@ -2,12 +2,13 @@ export const CHANGE_SEARCH_RUSSIAN = 'CHANGE_SEARCH_RUSSIAN'
 export const CHANGE_SEARCH_CIRCASSIAN = 'CHANGE_SEARCH_CIRCASSIAN'
 export const SHOW_LOADER = 'SHOW_LOADER'
 export const HIDE_LOADER = 'HIDE_LOADER'
-export const ON_SEARCH = 'ON_SEARCH'
 export const FOUNDED_WORD = 'FOUNDED_WORD'
 export const CLEAR_STATE = 'CLEAR_STATE'
+export const ON_SEARCH_IN_RUSSIAN = 'ON_SEARCH_IN_RUSSIAN'
+export const ON_SEARCH_IN_CIRCASSIAN = 'ON_SEARCH_IN_CIRCASSIAN'
 
-const RUSSIAN = 'russian'
-const CIRCASSIAN = 'circassian'
+export const RUSSIAN = 'russian'
+export const CIRCASSIAN = 'circassian'
 
 export function changeSearchToeRussian(){
     return{
@@ -41,13 +42,27 @@ export function clearState(){
 }
 
 
-export function fetchSearch(value=''){
+export function fetchRussianWords(value=''){
     return async dispatch =>{
         try {
             dispatch(showLoader())
             let response = await fetch(`http://192.168.43.136:1337/rus-words/search?letter=${value}`)
             let responseJson = await response.json();
-            dispatch({type: ON_SEARCH, payload: responseJson})
+            dispatch({type: ON_SEARCH_IN_RUSSIAN, payload: responseJson})
+            dispatch(hideLoader())
+
+          } catch (error) {
+            console.error(error);
+          }
+    }
+}
+export function fetchCircassianWords(value=''){
+    return async dispatch =>{
+        try {
+            dispatch(showLoader())
+            let response = await fetch(`http://192.168.43.136:1337/cher-words/search?letter=${value}`)
+            let responseJson = await response.json();
+            dispatch({type: ON_SEARCH_IN_CIRCASSIAN, payload: responseJson})
             dispatch(hideLoader())
 
           } catch (error) {

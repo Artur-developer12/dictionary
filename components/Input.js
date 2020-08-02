@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {StyleSheet, View, TextInput} from 'react-native'
 import {connect, useDispatch, useSelector} from 'react-redux'
-import {fetchSearch} from '../redux/action'
+import {fetchRussianWords,fetchCircassianWords, RUSSIAN, CIRCASSIAN} from '../redux/action'
 
 
 
@@ -11,11 +11,22 @@ import {fetchSearch} from '../redux/action'
 const SearchBlock = ({noFocus, w100}) => {
 
     const searchData = useSelector(state => state.searchData);
+    const language = useSelector(state => state.language);
     const dispatch = useDispatch();
+
+
+    console.log(language)
+
+    // ввод в input
     const onSearch = async (value) => {
         console.log(value)
+        if(language === RUSSIAN){
+            dispatch(fetchRussianWords(value)) 
+
+        }else if(language === CIRCASSIAN){
+            dispatch(fetchCircassianWords(value))
+        }
         
-        dispatch(fetchSearch(value))
         console.log('input',searchData)
     }
     
