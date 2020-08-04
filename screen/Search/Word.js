@@ -14,7 +14,8 @@ import ButtonBack from '../../components/ButtonBack'
 import { ScrollView } from 'react-native-gesture-handler'
 
 const Word = ({navigation, route}) => {
-
+    
+    const [error, setError] = useState(false)
     const {wordId} = route.params
     console.log(wordId)
 
@@ -22,7 +23,7 @@ const Word = ({navigation, route}) => {
     const wordData = useSelector(state => state.foundedWord)
     
     useEffect(()=>{
-        dispatch(getFondedWord(wordId))
+        wordId && dispatch(getFondedWord(wordId))
     },[])
 
 
@@ -45,7 +46,7 @@ const Word = ({navigation, route}) => {
                     </View>
                     <Translate translate={wordData}/>
                     {wordData.sentence && <Sentence sentence={wordData.sentence}/>}
-                    <Grammar/>
+                    <Grammar grammar={wordData}/>
                     <Proverb/>
                 </ScrollView>
             }

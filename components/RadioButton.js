@@ -9,23 +9,32 @@ export default class RadioButton extends Component {
 	render() {
 		const { PROP } = this.props;
 		const { value } = this.state;
+		console.log(this.state.value)
 
 		return (
 			<View>
 				{PROP.map(res => {
 					return (
-						<View key={res.key} style={styles.container}>
+						<TouchableOpacity
+							key={res.key}
+							onPress={() => {
+								this.setState({
+									value: res.key,
+								});
+							}}
+							style={styles.container}
+						>
+
+						<View style={styles.inner}>
 							<Text style={styles.radioText}>{res.text}</Text>
 							<TouchableOpacity
 								style={styles.radioCircle}
-								onPress={() => {
-									this.setState({
-										value: res.key,
-									});
-								}}>
+								>
                                   {value === res.key && <View style={styles.selectedRb} />}
 							</TouchableOpacity>
 						</View>
+						</TouchableOpacity>
+
 					);
 				})}
                 {/* <Text> Selected: {this.state.value} </Text> */}
@@ -35,7 +44,12 @@ export default class RadioButton extends Component {
 }
 
 const styles = StyleSheet.create({
-	container: {
+	container:{
+		paddingVertical: 10,
+		borderBottomWidth: 1,
+		borderColor:'#f0f0f0'
+	},
+	inner: {
         marginBottom: 10,
         alignItems: 'center',
         flexDirection: 'row',
@@ -43,13 +57,13 @@ const styles = StyleSheet.create({
 	},
     radioText: {
         marginRight: 35,
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: 'Montserrat-Medium',
         color: '#000',
     },
 	radioCircle: {
-		height: 30,
-		width: 30,
+		height: 20,
+		width: 20,
 		borderRadius: 100,
 		borderWidth: 2,
 		borderColor: '#2C98F0',
@@ -57,8 +71,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	selectedRb: {
-		width: 15,
-		height: 15,
+		width: 10,
+		height: 10,
 		borderRadius: 50,
 		backgroundColor: '#2C98F0',
     },

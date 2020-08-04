@@ -8,7 +8,7 @@ const More = () => {
         <View style={styles.more}>
             <TouchableOpacity>
                 <View style={styles.moreBlock}>
-                    <Text style={styles.moreText}>Иджыри</Text>
+                    <Text style={styles.moreText}>Еще</Text>
                     <Ionicons style={styles.moreIcon} name="ios-arrow-forward"/>
                 </View>
             </TouchableOpacity>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         opacity: 0.6,
     },
     moreText:{
-        fontSize: 9,
+        fontSize: 11,
         fontFamily: 'Montserrat-Regular',
         marginRight: 5,
 

@@ -25,7 +25,7 @@ const SearchActive = ({navigation}) => {
             {searchData.map((item,index)=>{
                 return(
                     <View key={index} style={styles.fetch} >
-                        <TouchableNativeFeedback onPress={()=>navigation.navigate('Word', {wordId: item.translate.id})}>
+                        <TouchableNativeFeedback onPress={()=>navigation.navigate('Word', {wordId: item.translate && item.translate.id})}>
                             <View>
                                 <Text style={styles.fetchText}>{item.word}</Text>
                             </View>

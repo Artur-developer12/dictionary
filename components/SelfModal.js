@@ -1,11 +1,25 @@
-import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, Button, TouchableNativeFeedback, TextInput } from 'react-native'
+import React, {useRef, useState} from 'react'
+import { 
+    StyleSheet, 
+    Text, 
+    View, 
+    TouchableHighlight, 
+    Button, 
+    TouchableNativeFeedback, 
+    TextInput, 
+    Animated, 
+    Modal, 
+    Easing,
+    TouchableOpacity
+} from 'react-native'
 import {AntDesign} from '@expo/vector-icons';
-import Modal from 'react-native-modal'
 
 import RadioButton from './RadioButton'
 
-const SelfModal = ({visible, closeModal}) => {
+const SelfModal = ( {visible, openModal}) => {
+
+
+
     const PROP = [
         {
             key: 'Неправильный перевод',
@@ -21,23 +35,67 @@ const SelfModal = ({visible, closeModal}) => {
         }
         
     ];
+// animate
+const openModalAnim = useRef(new Animated.Value(400)).current 
+const modalOpacitiAnim = useRef(new Animated.Value(0)).current 
 
+
+const onModalShow = () => {
+    Animated.parallel([
+        Animated.timing(openModalAnim, {
+            toValue: 0,
+            duration: 600,
+            useNativeDriver: true, 
+            easing: Easing.out(Easing.exp)
+        }),
+        Animated.timing(modalOpacitiAnim, {
+            toValue: 1,
+            duration: 600,
+            useNativeDriver: true, 
+            easing: Easing.out(Easing.exp)
+        })
+        
+
+    ]).start()
+}
+ 
+
+
+const onModalClose = () => {
+    console.log('close')
+    Animated.parallel([
+        Animated.timing(openModalAnim, {
+            toValue: 400,
+            duration: 400,
+            useNativeDriver: true, 
+            easing: Easing.out(Easing.exp)
+        }),
+        Animated.timing(modalOpacitiAnim, {
+            toValue: 0,
+            duration: 600,
+            useNativeDriver: true, 
+            easing: Easing.out(Easing.exp)
+        })
+
+    ]).start(()=>openModal())
+
+}
+
+
+ 
+    
     
     return (
-        <Modal  
-        isVisible={visible}
-        // onSwipeStart={()=>closeModal()}
-        backdropTransitionInTiming={400}
-        backdropTransitionOutTiming={600}
-        style={styles.modalBotom}
-        swipeDirection="left"
-        hideModalContentWhileAnimating={true}
-        useNativeDriver={false}
-        
-    >   
-            <View style={styles.moadalContainer}>
+      
+        <Modal 
+            visible={visible}
+            transparent={true}
+            onShow={onModalShow}
+        >  
+            <Animated.View style={[styles.moadalContainer, {opacity: modalOpacitiAnim}]}>
+                <Animated.View style={[styles.modalInner, {transform:[{translateY: openModalAnim}]}]}>
                 <TouchableHighlight 
-                    onPress={()=>closeModal()}
+                    onPress={()=>onModalClose()}
                     activeOpacity={0.6}
                     underlayColor="#DDDDDD"
                     style={styles.modalClosePress}
@@ -48,17 +106,20 @@ const SelfModal = ({visible, closeModal}) => {
                 <View style={styles.problem}>
                     <RadioButton PROP={PROP}/>
                 </View>
+                <Text style={styles.comment}>Коментарий или предложения</Text>
                 <View>
                     <TextInput 
                         style={styles.input}
-                        placeholder="Введите текст"
+                        placeholder="по желанию"
                         placeholderTextColor={'#CFCFCF'}
                     />
                     <TouchableNativeFeedback>
-                            <Button onPress={() =>console.log('send')} title="Отправить"/>
+                            <Button style={styles.button} onPress={() =>console.log('send')} title="Отправить"/>
                     </TouchableNativeFeedback>
                 </View>
-        </View>
+            </Animated.View>
+
+        </Animated.View>
     </Modal>
     )
 }
@@ -66,13 +127,12 @@ const SelfModal = ({visible, closeModal}) => {
 export default SelfModal
 
 const styles = StyleSheet.create({
-    modalBotom:{
-        justifyContent: "flex-end",
-        margin: 0,
-    },
     moadalContainer:{
-        width: '100%',
-        height: 400,
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        justifyContent: 'flex-end',
+    },
+    modalInner:{
         backgroundColor: '#fff',
         borderTopRightRadius: 10,
         borderTopLeftRadius: 10,
@@ -98,12 +158,27 @@ const styles = StyleSheet.create({
         width: 50,
         height:50,
     },
+    comment:{
+        paddingVertical: 20,
+        fontFamily: 'Montserrat-SemiBold',
+        opacity: 0.2,
+    },
     input:{
         backgroundColor:'#F7F7F7',
         alignItems: 'flex-start',
-        borderRadius: 3,
-        height: 100,
-        paddingLeft: 20,
-        fontFamily: 'Montserrat-Bold'
+        borderRadius: 5,
+        height: 150,
+        padding: 10,
+        fontFamily: 'Montserrat-Bold',
+        marginBottom: 30,
+        textAlignVertical: 'top'
+
     },
+    button:{
+        elevation: 0,
+        shadowOffset: {height: 0, width: 0},
+        shadowOpacity: 0, height: 0
+
+
+    }
 })

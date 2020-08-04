@@ -1,33 +1,43 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const Grammar = () => {
+const Grammar = ({grammar}) => {
     return (
         <View style={styles.grammar}>
             <View style={styles.grammarItem}>
                 <View style={styles.grammarHeader}>
-                    <Text style={styles.grammarTitle}>Синонимхэр</Text>
-                    <Text style={styles.grammarCol}>1</Text>
+                    <Text style={styles.grammarTitle}>Синонимы</Text>
+                    <Text style={styles.grammarCol}></Text>
                 </View>
-                <View style={styles.grammarBlock}>
-                    <View style={styles.grammarElem}>
-                        <Text style={styles.grammarText}>Губзыгъэ</Text>
-                    </View>
+                <View  style={styles.grammarBlock}>
+                {
+                    grammar.synonym  && grammar.synonym.synonym.map((item,index)=>{
+                        return(
+                            <View key={index} style={styles.grammarElem}>
+                                <Text style={styles.grammarText}>
+                                    {item.word}
+                                </Text>
+                            </View>
+                        )
+                    })
+                }
                 </View>
             </View>
 
             <View style={styles.grammarItem}>
                 <View style={styles.grammarHeader}>
-                    <Text style={styles.grammarTitle}>Антонимхэр</Text>
-                    <Text style={styles.grammarCol}>2</Text>
+                    <Text style={styles.grammarTitle}>Антонимы</Text>
+                    <Text style={styles.grammarCol}></Text>
                 </View>
                 <View style={styles.grammarBlock}>
-                    <View style={styles.grammarElem}>
-                        <Text style={styles.grammarText}>Акъылэншэ</Text>
-                    </View>
-                    <View style={styles.grammarElem}>
-                        <Text style={styles.grammarText}>Делэ</Text>
-                    </View>
+                    {
+                        grammar.antonym  && grammar.antonym.antonym.map((item,index)=>{
+                            <View key={index} style={styles.grammarElem}>
+                                <Text style={styles.grammarText}>{item.word}</Text>
+                            </View>
+                        })
+                    }
+                    
                 </View>
             </View>
         </View>
@@ -46,8 +56,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     grammarTitle:{
-        fontSize: 18,
-        fontFamily: 'Montserrat-SemiBold',
+        fontSize: 16,
+        fontFamily: 'Montserrat-Bold',
         marginRight: 5
 
     },

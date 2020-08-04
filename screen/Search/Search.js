@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { Text, StyleSheet, View, TouchableNativeFeedback, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons'; 
@@ -9,12 +9,16 @@ import SelectLanguage from '../../components/SelectLanguage'
 
 
 const Search = ({navigation}) =>  {
-    
- 
 
-        return (
-            <View style={styles.conteiner}>
-                <StatusBar style="auto" />
+    useEffect(()=>{
+
+    })
+    
+    
+    
+    return (
+        <View style={styles.conteiner}>
+        <StatusBar barStyle={"light-content"} style="auto" />
                 <View style={styles.search}>
                     <SelectLanguage/>
                     <TouchableWithoutFeedback onPress={()=>navigation.navigate('SearchActive')}>
@@ -26,7 +30,7 @@ const Search = ({navigation}) =>  {
                     </TouchableWithoutFeedback>
                 </View>
                 <View style={styles.recently}>
-                    <View style={styles.recentlyBlock}>  
+                    {/* <View style={styles.recentlyBlock}>  
                         <TouchableNativeFeedback>
                             <View style={styles.recentlyItem}>
                                 <FontAwesome5 style={styles.recentlyIcon} name="search" size={18}  />
@@ -36,7 +40,7 @@ const Search = ({navigation}) =>  {
                     </View>
                     <TouchableOpacity>
                         <Text style={styles.recentlyCleat}>Очистить историю</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>
         )
@@ -50,7 +54,7 @@ const styles = StyleSheet.create({
     },
     search:{
         alignItems: 'center',
-        backgroundColor: '#278BFF',
+        backgroundColor: '#60A9FF',
         paddingVertical: 40
     },
     startSearch:{

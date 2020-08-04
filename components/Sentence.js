@@ -8,7 +8,7 @@ const Sentence = ({sentence}) => {
     let count = 1
     return (
         <View style={styles.sentence}>
-            <Text style={styles.sentenceTitle}>Предложенэ</Text>
+            <Text style={styles.sentenceTitle}>Простые предложения</Text>
             <View style={styles.sentenceBlock}>
             {sentence.map((item, index)=>{
                 return (
@@ -23,7 +23,7 @@ const Sentence = ({sentence}) => {
             })
             }
             </View>
-            <More/>
+            {/* <More/> */}
         </View>
     )
 }
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     sentenceTitle: {
-        fontSize: 18,
-        fontFamily: 'Montserrat-SemiBold',
+        fontSize: 16,
+        fontFamily: 'Montserrat-Bold',
         marginBottom: 15,
         
     },

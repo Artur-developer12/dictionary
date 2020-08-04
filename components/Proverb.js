@@ -4,8 +4,8 @@ import { StyleSheet, Text, View } from 'react-native'
 const Proverb = () => {
     return (
         <View style={styles.Proverb}>
-            <Text style={styles.ProverbTitle}>Пэсловицэ</Text>
-            <Text style={styles.ProverbText}>Акъыл зиIэм уеущиймэ, фIыщIэ къыпхуищIынщ, акъылыншэм ауан укъищIынщ</Text>
+            <Text style={styles.ProverbTitle}>Пословицы</Text>
+            {/* <Text style={styles.ProverbText}>Акъыл зиIэм уеущиймэ, фIыщIэ къыпхуищIынщ, акъылыншэм ауан укъищIынщ</Text> */}
         </View>
     )
 }
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     ProverbTitle:{
-        fontSize: 18,
-        fontFamily: 'Montserrat-SemiBold',
+        fontSize: 16,
+        fontFamily: 'Montserrat-Bold',
         marginBottom: 10
     },
     ProverbText: {

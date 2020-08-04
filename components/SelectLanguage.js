@@ -46,11 +46,7 @@ const SelectLanguage = ({black}) => {
                 useNativeDriver: true, 
                 easing: Easing.linear,
             }),
-
-        ]).start(({finished})=> finished && setChangeLanguage(!changeLanguage))
-             
-
-        
+        ]).start(({finished})=> finished && setChangeLanguage(!changeLanguage))             
       };
 
       const spin = rotateAnim.interpolate({

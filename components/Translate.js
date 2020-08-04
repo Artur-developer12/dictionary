@@ -1,7 +1,6 @@
-import React, {useState} from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, Button, TouchableNativeFeedback, TextInput } from 'react-native'
+import React, {useState, useRef} from 'react'
+import { StyleSheet, Text, View, TouchableHighlight, Button, Modal, Animated } from 'react-native'
 import { FontAwesome, MaterialIcons,AntDesign} from '@expo/vector-icons';
-import Modal from 'react-native-modal'
 
 import RadioButton from '../components/RadioButton'
 import SelfModal from '../components/SelfModal'
@@ -10,14 +9,18 @@ import SelfModal from '../components/SelfModal'
 const Translate = ({translate}) => {
 
     const [visible, setVisible] = useState(false)
-    const closeModal = () => setVisible(false)
+    const openModal = () => {
+        setVisible(false)
+    }
+
+
 
 
     return (
         <View style={styles.translate}>
-          <SelfModal visible={visible} closeModal={closeModal}/>
             <View style = {styles.wordBlock}>
                 <Text style={styles.Word}>{translate.rus_word.word}</Text>
+
                 <View style = {styles.Value}>
                     <Text style = {styles.ValueText}>{translate.cher_word.word}</Text>
                     <TouchableHighlight
@@ -49,6 +52,10 @@ const Translate = ({translate}) => {
                 </TouchableHighlight>
                 
             </View>
+            
+                <SelfModal visible={visible}   openModal={openModal} />
+
+
         </View>
     )
 }
@@ -82,7 +89,7 @@ const styles = StyleSheet.create({
     },
     ValueSound:{
         fontSize: 24,
-        color: '#0679FF',
+        color: '#D2D2D2',
     },
     ValueSoundClick:{
         width: 40,
