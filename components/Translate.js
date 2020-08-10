@@ -7,6 +7,7 @@ import SelfModal from '../components/SelfModal'
 
 
 const Translate = ({translate}) => {
+    console.log('translate',translate)
 
     const [visible, setVisible] = useState(false)
     const openModal = () => {
@@ -19,10 +20,10 @@ const Translate = ({translate}) => {
     return (
         <View style={styles.translate}>
             <View style = {styles.wordBlock}>
-                <Text style={styles.Word}>{translate.rus_word.word}</Text>
+                <Text style={styles.Word}>{translate.Russian}</Text>
 
                 <View style = {styles.Value}>
-                    <Text style = {styles.ValueText}>{translate.cher_word.word}</Text>
+                    <Text style = {styles.ValueText}>{translate.Circassian}</Text>
                     <TouchableHighlight
                          activeOpacity={0.6}
                          underlayColor="#DDDDDD"

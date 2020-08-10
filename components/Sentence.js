@@ -15,8 +15,8 @@ const Sentence = ({sentence}) => {
                     <View key={index} style={styles.sentenceItem}>
                         <Text style={styles.sentenceNum}>{count++}</Text>
                         <View style={styles.sentenceElem}>
-                            <Text style={styles.sentenceWord}>{item.text_circassian}</Text>
-                            <Text style={styles.sentenceTranslate}>{item.text_rusisan}</Text>
+                            <Text style={styles.sentenceWord}>{item.Circassian_text}</Text>
+                            <Text style={styles.sentenceTranslate}>{item.Russian_text}</Text>
                         </View>
                     </View>
                 )

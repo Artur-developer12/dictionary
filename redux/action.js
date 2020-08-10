@@ -1,3 +1,5 @@
+import {API_URL} from '../config'
+
 export const CHANGE_SEARCH_RUSSIAN = 'CHANGE_SEARCH_RUSSIAN'
 export const CHANGE_SEARCH_CIRCASSIAN = 'CHANGE_SEARCH_CIRCASSIAN'
 export const SHOW_LOADER = 'SHOW_LOADER'
@@ -46,7 +48,7 @@ export function fetchRussianWords(value=''){
     return async dispatch =>{
         try {
             dispatch(showLoader())
-            let response = await fetch(`http://192.168.43.136:1337/rus-words/search?letter=${value}`)
+            let response = await fetch(`${API_URL}/dictionaries/search?language=rus&letter=${value}`)
             let responseJson = await response.json();
             dispatch({type: ON_SEARCH_IN_RUSSIAN, payload: responseJson})
             dispatch(hideLoader())
@@ -60,7 +62,7 @@ export function fetchCircassianWords(value=''){
     return async dispatch =>{
         try {
             dispatch(showLoader())
-            let response = await fetch(`http://192.168.43.136:1337/cher-words/search?letter=${value}`)
+            let response = await fetch(`${API_URL}/dictionaries/search?language=circ&letter=${value}`)
             let responseJson = await response.json();
             dispatch({type: ON_SEARCH_IN_CIRCASSIAN, payload: responseJson})
             dispatch(hideLoader())
@@ -76,7 +78,7 @@ export function getFondedWord(id){
     return async dispatch =>{
         try {
             // dispatch(showLoader())
-            let response = await fetch(`http://192.168.43.136:1337/translates/${id}`)
+            let response = await fetch(`${API_URL}/dictionaries/${id}`)
             let responseJson = await response.json();
             dispatch({type: FOUNDED_WORD, payload: responseJson})
             // dispatch(hideLoader())

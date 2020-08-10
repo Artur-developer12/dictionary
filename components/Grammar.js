@@ -11,7 +11,7 @@ const Grammar = ({grammar}) => {
                 </View>
                 <View  style={styles.grammarBlock}>
                 {
-                    grammar.synonym  && grammar.synonym.synonym.map((item,index)=>{
+                    grammar.synonym  && grammar.synonym.map((item,index)=>{
                         return(
                             <View key={index} style={styles.grammarElem}>
                                 <Text style={styles.grammarText}>
@@ -31,7 +31,7 @@ const Grammar = ({grammar}) => {
                 </View>
                 <View style={styles.grammarBlock}>
                     {
-                        grammar.antonym  && grammar.antonym.antonym.map((item,index)=>{
+                        grammar.antonym  && grammar.antonym.map((item,index)=>{
                             <View key={index} style={styles.grammarElem}>
                                 <Text style={styles.grammarText}>{item.word}</Text>
                             </View>

@@ -45,7 +45,7 @@ const Word = ({navigation, route}) => {
                         <Input noFocus/> */}
                     </View>
                     <Translate translate={wordData}/>
-                    {wordData.sentence && <Sentence sentence={wordData.sentence}/>}
+                    <Sentence sentence={wordData.sentences}/>
                     <Grammar grammar={wordData}/>
                     <Proverb/>
                 </ScrollView>
